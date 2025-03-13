@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,9 +19,7 @@ Route::get('/studies', function () {
     return view('studies');
 });
 
-Route::get('/gallery', function () {
-    return view('gallery');
-});
+Route::get('/gallery', [GalleryController::class, 'index']);
 
 Route::get('/contact', function () {
     return view('contact');

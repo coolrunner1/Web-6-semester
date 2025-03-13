@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Моя страница</title>
+        <link rel="icon" sizes="any" type="image/svg+xml" href="{{url('storage/icons/home-2741413_960_720.png')}}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -32,19 +33,15 @@
                         <div class="content-box interests-dropdown">
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int1') }}" class="hero-secondary-but">Игры</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int2') }}" class="hero-secondary-but">Английский язык</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int3') }}" class="hero-secondary-but">Книги</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int4') }}" class="hero-secondary-but">Фильмы</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                         </div>
                     </div>
@@ -71,76 +68,35 @@
         <div id="filler-top"></div>
         <div id="middle">
             <div class="information">Фотоальбом</div>
-            <div class="my-images">
-                <div class="img-intern">
-                    <img src="../assets/images/nmuax05zxoab1.gif" alt="c" title="C" class="image-with-border">
-                    <div class="img-descr">C</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/xxodzo30yoab1.gif" alt="c++" title="C++" class="image-with-border">
-                    <div class="img-descr">C++</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/fe36cc42774743.57ee5f329fae6.gif" alt="rust" title="Rust" class="image-with-border">
-                    <div class="img-descr">Rust</div>
-                </div>
-            </div>
-            <div class="my-images">
-                <div class="img-intern">
-                    <img src="../assets/images/vzkhe4s8dlab1.gif" alt="c#" title="C#" class="image-with-border">
-                    <div class="img-descr">C#</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/java.gif" alt="java" title="Java" class="image-with-border">
-                    <div class="img-descr">Java</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/gopher-workout.gif" alt="go" title="Go" class="image-with-border">
-                    <div class="img-descr">Go</div>
-                </div>
-            </div>
-            <div class="my-images">
-                <div class="img-intern">
-                    <img src="../assets/images/0*OxDZ95Af_-7Ih_-m.gif" alt="python" title="Python" class="image-with-border">
-                    <div class="img-descr">Python</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/js-javascript.gif" alt="javascript" title="Javascript" class="image-with-border">
-                    <div class="img-descr">Javascript</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/1*zoZ91dWACun-Acph7snQkw.gif" alt="ruby" title="Ruby" class="image-with-border">
-                    <div class="img-descr">Ruby</div>
-                </div>
-            </div>
-            <div class="my-images">
-                <div class="img-intern">
-                    <img src="../assets/images/1200px-Kotlin_Icon.png" alt="kotlin" title="Kotlin" class="image-with-border">
-                    <div class="img-descr">Kotlin</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/swift-og.png" alt="swift" title="Swift" class="image-with-border">
-                    <div class="img-descr">Swift</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/2048px-Dart_programming_language_logo_icon.svg.png" alt="dart" title="Dart" class="image-with-border">
-                    <div class="img-descr">Dart</div>
-                </div>
-            </div>
-            <div class="my-images">
-                <div class="img-intern">
-                    <img src="../assets/images/VBA_250x250.png" alt="vba" title="VBA" class="image-with-border">
-                    <div class="img-descr">VBA</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/021521_Fiverr_Pascal.webp" alt="pascal" title="Pascal" class="image-with-border">
-                    <div class="img-descr">Pascal</div>
-                </div>
-                <div class="img-intern">
-                    <img src="../assets/images/306px-HolyC_Logo.svg.png" alt="holyc" title="HolyC" class="image-with-border">
-                    <div class="img-descr">Holy C</div>
-                </div>
-            </div>
+
+            @if (count($photos) % 3 == 0)
+                @for ($i = 0; $i < count($photos); $i+=3)
+                    <div class="my-images">
+                        <div class="img-intern">
+                            <img src="{{ url($photos[$i]['path']) }}" alt="{{ $photos[$i]['alt'] }}" title="{{ $photos[$i]['title'] }}" class="image-with-border">
+                            <div class="img-descr">{{ $photos[$i]['title'] }}</div>
+                        </div>
+                        <div class="img-intern">
+                            <img src="{{ url($photos[$i+1]['path']) }}" alt="{{ $photos[$i+1]['alt'] }}" title="{{ $photos[$i+1]['title'] }}" class="image-with-border">
+                            <div class="img-descr">{{ $photos[$i+1]['title'] }}</div>
+                        </div>
+                        <div class="img-intern">
+                            <img src="{{ url($photos[$i+2]['path']) }}" alt="{{ $photos[$i+2]['alt'] }}" title="{{ $photos[$i+2]['title'] }}" class="image-with-border">
+                            <div class="img-descr">{{ $photos[$i+2]['title'] }}</div>
+                        </div>
+                    </div>
+                @endfor
+            @else
+                @foreach($photos as $photo)
+                    <div class="img-intern">
+                        <img src="{{ url($photo['path']) }}" alt="{{ $photo['alt'] }}" title="{{ $photo['title'] }}" class="image-with-border">
+                        <div class="img-descr">{{ $photo['title'] }}</div>
+                    </div>
+                @endforeach
+            @endif
+
+
+
         </div>
         <footer>
             <div class="foot-text">Copyleft coolrunner1 2025</div>

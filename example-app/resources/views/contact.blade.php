@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Моя страница</title>
+        <link rel="icon" sizes="any" type="image/svg+xml" href="{{url('storage/icons/home-2741413_960_720.png')}}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -33,19 +34,15 @@
                         <div class="content-box interests-dropdown">
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int1') }}" class="hero-secondary-but">Игры</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int2') }}" class="hero-secondary-but">Английский язык</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int3') }}" class="hero-secondary-but">Книги</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                             <div class="interests-dropdown-item">
                                 <a href="{{ url('/interests#int4') }}" class="hero-secondary-but">Фильмы</a>
-                                <div class="interests-item-svg"></div>
                             </div>
                         </div>
                     </div>

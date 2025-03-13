@@ -476,14 +476,6 @@ td {
     width: 200px;
 }
 
-.interests-item-svg {
-    background-image: url("{{ asset('svgs/right-arrow-svgrepo-com.svg')}}");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 18px;
-    width: 18px;
-}
-
 .interests-dropdown-item {
     justify-content: space-between;
 }
