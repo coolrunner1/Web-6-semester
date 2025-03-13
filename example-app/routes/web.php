@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\InterestsController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,8 +26,6 @@ Route::get('/contact', [ContactController::class, 'index']);
 
 Route::post('/contact', [ContactController::class, 'store']);
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/test', [TestController::class, 'index']);
 
-
+Route::post('/test', [TestController::class, 'store']);

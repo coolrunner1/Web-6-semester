@@ -52,7 +52,8 @@ class FormValidation
         }
         foreach ($this->rules as $fieldName => $rule) {
             if (!array_key_exists($fieldName, $postArray)) {
-                $this->errors[] = "Отсутствуют правила валидации для поля: {$fieldName}!";
+                $this->errors[] = "Отсутствует поле для правила валидации: {$fieldName}!";
+                continue;
             }
             switch ($rule) {
                 case 'isNotEmpty':

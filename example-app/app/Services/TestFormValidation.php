@@ -4,21 +4,27 @@ namespace App\Services;
 
 use App\Services\FormValidation;
 
-class ContactFormValidation extends FormValidation
-{
-    public function isValidBirthdate($birthdate, $age): bool {
-        $currentYear = date('Y');
-        $formattedBirthdate = strtotime($birthdate);
-        $birthYear = date('Y', $formattedBirthdate);
-        return ($currentYear - $birthYear == $age || $currentYear - $birthYear == $age+1) && $currentYear > $birthYear;
+class TestFormValidation extends FormValidation {
+    public function validAnswer1($data): bool {
+        return !(bool)strcmp(mb_strtolower($data), "спецификация");
     }
 
-    public function isPhone($data): bool {
-        if (!is_numeric($data)) {
-            return false;
+    public function validAnswer2($data): bool {
+        $valid = 0;
+        $errors = 0;
+        foreach (explode("_", $data) as $value) {
+            if ($value == "bolt" || $value == "vent") {
+                $valid++;
+            } else if ($value == "plane" || $value == "scissors") {
+                $errors++;
+            }
         }
+        return $valid == 2 && $errors == 0;
+    }
 
-        return strlen($data) == 12;
+
+    public function validAnswer3($data): bool {
+        return !(bool)strcmp($data, "Прямые линии");
     }
 
     public function validate($postArray) {
@@ -27,8 +33,10 @@ class ContactFormValidation extends FormValidation
         }
         foreach ($this->rules as $fieldName => $rule) {
             if (!array_key_exists($fieldName, $postArray)) {
-                $this->errors[] = "Отсутствует поле для правила валидации: {$fieldName}!";
-                continue;
+                if (strcmp($rule, 'validAnswer2') !== 0) {
+                    $this->errors[] = "Отсутствует поле для правила валидации: {$fieldName}!";
+                    continue;
+                }
             }
             switch ($rule) {
                 case 'isNotEmpty':
@@ -56,14 +64,19 @@ class ContactFormValidation extends FormValidation
                         $this->errors[] = "{$postArray[$fieldName]} не является настоящим возрастом!";
                     }
                     break;
-                case 'isValidBirthdate':
-                    if (!$this->isValidBirthdate($postArray[$fieldName], $postArray['age'])) {
-                        $this->errors[] = "{$postArray[$fieldName]} не является настоящей датой рождения!";
+                case 'validAnswer1':
+                    if (!$this->validAnswer1($postArray[$fieldName])) {
+                        $this->errors[] = "{$postArray[$fieldName]} - неверный ответ на вопрос №1!";
                     }
                     break;
-                case 'isPhone':
-                    if (!$this->isPhone($postArray[$fieldName])) {
-                        $this->errors[] = "{$postArray[$fieldName]} не является номером телефона!";
+                case 'validAnswer2':
+                    if (!$this->validAnswer2($postArray[$fieldName])) {
+                        $this->errors[] = "На вопрос №2 был дан неверный ответ!";
+                    }
+                    break;
+                case 'validAnswer3':
+                    if (!$this->validAnswer3($postArray[$fieldName])) {
+                        $this->errors[] = "{$postArray[$fieldName]} - неверный ответ на вопрос №3!";
                     }
                     break;
                 default:
