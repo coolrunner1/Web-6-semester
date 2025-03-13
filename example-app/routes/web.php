@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\InterestsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,9 +12,7 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/interests', function () {
-    return view('interests');
-});
+Route::get('/interests', [InterestsController::class, 'index']);
 
 Route::get('/studies', function () {
     return view('studies');
