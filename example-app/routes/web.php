@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\InterestsController;
 use Illuminate\Support\Facades\Route;
@@ -20,9 +21,9 @@ Route::get('/studies', function () {
 
 Route::get('/gallery', [GalleryController::class, 'index']);
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+Route::get('/contact', [ContactController::class, 'index']);
+
+Route::post('/contact', [ContactController::class, 'store']);
 
 Route::get('/test', function () {
     return view('test');

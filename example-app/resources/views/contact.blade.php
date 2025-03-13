@@ -66,44 +66,89 @@
                 -->
             </div>
         </header>
+        @if ($success)
+            <div id='fullscreen-overlay'>
+                <div class='pop-up'>
+                    Ваше письмо было успешно отправлено!
+                    <div class='bottom-buttons'>
+                        <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
+                        <a href="{{url("/contact")}}"><button id='yes-popup'>Вернуться к форме</button></a>
+                    </div>
+                </div>
+            </div>
+        @endif
+        @if (count($errors) > 0)
+            <div id='fullscreen-overlay'>
+                <div class='pop-up'>
+                    <ul class="error-list">
+                        <lh>Ошибки</lh>
+                        @foreach($errors as $error)
+                            <li class="hero-secondary">{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    <div class='bottom-buttons'>
+                        <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
+                        <a href="{{url("/contact")}}"><button id='yes-popup'>Вернуться к форме</button></a>
+                    </div>
+                </div>
+            </div>
+        @endif
         <div id="filler-top"></div>
         <div class="content-container">
             <div class="information">Обратная связь</div>
             <div class="secondary-contact-text">Если у вас есть пожелания по улучшению этого сайта, заполните данную форму</div>
-            <form id="survey-form" action="mailto:youraddr@domain.com?subject=dsifisdf" method="GET">
+            <form id="survey-form" action="{{url("/contact")}}" method="POST">
+                @csrf <!-- {{ csrf_field() }} -->
                 <div class="input-container" id="name-container">
-                    <label id="name-label" for="name"><span class="label-text">Фамилия Имя Отчество</span><input id="name" type="text" placeholder="Введите своё имя" required /></label>
+                    <label id="name-label" for="name">
+                        <span class="label-text">Фамилия Имя Отчество</span>
+                        <input id="name" name="name" type="text" placeholder="Введите своё имя" required /></label>
                 </div>
                 <div class="input-container" id="email-container">
-                    <label id="email-label"  for="email"><span class="label-text">Электронная почта</span><input id="email" type="email" placeholder="Введите свою почту" required /></label>
+                    <label id="email-label" for="email">
+                        <span class="label-text">Электронная почта</span>
+                        <input id="email" name="email" type="email" placeholder="Введите свою почту" required />
+                    </label>
                 </div>
                 <div class="input-container" id="number-container">
-                    <label id="number-label"  for="number"><span class="label-text">Телефон</span><input id="number" type="text" placeholder="Введите свой номер телефона" required /></label>
+                    <label id="number-label" for="number">
+                        <span class="label-text">Телефон</span>
+                        <input id="number" name="phone" type="text" placeholder="Введите свой номер телефона" required />
+                    </label>
                 </div>
                 <div class="input-container" id="age-container">
-                    <label id="age-label"  for="age"><span class="label-text">Возраст</span><input id="age" type="number" min=0 max=150 placeholder="Введите свой возраст" required /></label>
+                    <label id="age-label" for="age">
+                        <span class="label-text">Возраст</span>
+                        <input id="age" name="age" type="number" min=0 max=150 placeholder="Введите свой возраст" required />
+                    </label>
                 </div>
                 <div id="myboxes">
                     <label>Пол</label>
                     <div>
-                        <label class="check"><input type="radio" name="conditions"  class="radios" value="male"/> Мужской</label>
-                        <label class="check"><input type="radio" class="radios" name="conditions" value="female"/> Женский</label>
+                        <label class="check"><input type="radio" class="radios" name="sex" value="male"/> Мужской</label>
+                        <label class="check"><input type="radio" class="radios" name="sex" value="female"/> Женский</label>
                     </div>
                 </div>
                 <div class="input-container" id="date-container">
-                    <label id="date-label"  for="date"><span class="label-text">Дата рождения</span><input id="date" type="date" required readonly /></label>
-                    <div id="calendar-container"></div>
+                    <label id="date-label" for="date">
+                        <span class="label-text">Дата рождения</span>
+                        <input id="date" name="birthdate" type="date" required />
+                    </label>
+                    <!--<div id="calendar-container"></div>-->
                 </div>
                 <div class="input-container" id="text-container">
-                    <label id="topic-label" for="text"><span class="label-text">Тема</span><input name="subject" id="text" type="text" placeholder="Введите тему письма" required /></label>
+                    <label id="topic-label" for="text">
+                        <span class="label-text">Тема</span>
+                        <input name="subject" id="text" type="text" placeholder="Введите тему письма" required />
+                    </label>
                 </div>
                 <label>
                     <span class="label-text">Пожелания</span>
                     <textarea name="body"></textarea>
                 </label>
                 <div class="bottom-buttons">
-                    <button id="but2" type="button">Отправить</button>
-                    <button id="but3" type="button">Очистить</button>
+                    <button id="but2" type="submit">Отправить</button>
+                    <button id="but3" type="reset">Очистить</button>
                 </div>
             </form>
             <footer>

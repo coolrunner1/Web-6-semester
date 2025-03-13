@@ -678,3 +678,12 @@ td {
 .input-filler-top {
     padding: 15px 0;
 }
+
+.error-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: auto;
+    max-width: 400px;
+}
+
