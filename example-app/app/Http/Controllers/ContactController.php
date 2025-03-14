@@ -23,6 +23,9 @@ class ContactController extends Controller
 
     public function store(Request $request) {
         $data = $request->all();
+        foreach ($data as $fieldName => $value) {
+            error_log("{$fieldName}: {$value}");
+        }
 
         $validation = new ContactFormValidation();
 
@@ -30,6 +33,7 @@ class ContactController extends Controller
         $validation->setRule("email", 'isEmail');
         $validation->setRule("age", 'isAge');
         $validation->setRule("phone", 'isPhone');
+        $validation->setRule("sex", 'isSex');
         $validation->setRule("birthdate", 'isValidBirthdate');
         $validation->setRule("subject", 'isNotEmpty');
         $validation->setRule("body", 'isNotEmpty');

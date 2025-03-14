@@ -21,6 +21,10 @@ class ContactFormValidation extends FormValidation
         return strlen($data) == 12;
     }
 
+    public function isSex($data): bool {
+        return $data == "female" || $data == "male";
+    }
+
     public function validate($postArray) {
         if (!count($this->rules)) {
             return ["Отсутствуют правила для валидации"];
@@ -64,6 +68,11 @@ class ContactFormValidation extends FormValidation
                 case 'isPhone':
                     if (!$this->isPhone($postArray[$fieldName])) {
                         $this->errors[] = "{$postArray[$fieldName]} не является номером телефона!";
+                    }
+                    break;
+                case 'isSex':
+                    if (!$this->isSex($postArray[$fieldName])) {
+                        $this->errors[] = "{$postArray[$fieldName]} не является настоящим полом!";
                     }
                     break;
                 default:

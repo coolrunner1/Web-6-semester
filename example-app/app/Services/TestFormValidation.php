@@ -6,7 +6,7 @@ use App\Services\FormValidation;
 
 class TestFormValidation extends FormValidation {
     public function validAnswer1($data): bool {
-        return !(bool)strcmp(mb_strtolower($data), "спецификация");
+        return !(bool)strcmp(mb_strtolower(trim($data)), "спецификация");
     }
 
     public function validAnswer2($data): bool {
