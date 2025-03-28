@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ContactFormValidation;
+use App\Models\Review;
+use App\Services\FormValidation;
 use Illuminate\Http\Request;
 
-class ContactController extends Controller
+class GuestBookController extends Controller
 {
     private array $errors;
     private bool $sent;
@@ -18,26 +19,30 @@ class ContactController extends Controller
     public function index() {
         $errors = $this->errors;
         $success = $this->sent;
-        return view('contact', compact('errors'), compact('success'));
+        $reviews = Review::all()->sortByDesc("created_at");
+
+        return view('guestbook', compact('errors', 'success', 'reviews'),);
     }
 
-    public function store(Request $request) {
+    public function addReview(Request $request) {
         $data = $request->all();
 
-        $validation = new ContactFormValidation();
+        $validation = new FormValidation();
 
         $validation->setRule("name", 'isName');
         $validation->setRule("email", 'isEmail');
-        $validation->setRule("age", 'isAge');
-        $validation->setRule("phone", 'isPhone');
-        $validation->setRule("sex", 'isSex');
-        $validation->setRule("birthdate", 'isValidBirthdate');
-        $validation->setRule("subject", 'isNotEmpty');
         $validation->setRule("body", 'isNotEmpty');
 
         $validation->validate($data);
         $this->errors = $validation->showErrors();
         $this->sent = count($this->errors) === 0;
+        if ($this->sent) {
+            Review::create(['name' => $data['name'], 'email' => $data['email'], 'body' => $data['body']]);
+        }
         return $this->index();
+    }
+
+    public function getReviews(Request $request) {
+        return Review::all();
     }
 }
