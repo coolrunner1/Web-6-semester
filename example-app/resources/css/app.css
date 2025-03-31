@@ -248,7 +248,12 @@ img {
 #but3,
 #but4,
 #yes-popup,
-#no-popup {
+#no-popup,
+.form-button {
+    border-color: #e5e7eb;
+}
+
+.form-button:hover {
     border-color: #e5e7eb;
 }
 
@@ -720,4 +725,24 @@ td {
 .review-body {
     color: #0a0a0a;
     font-size: 18px;
+}
+
+.upload-form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    max-width: 400px;
+}
+
+.upload-input {
+    color: #0a0a0a;
+    border-color: white;
+}
+
+.review-buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
 }

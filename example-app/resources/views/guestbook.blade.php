@@ -21,7 +21,7 @@
         @if ($success)
             <div id='fullscreen-overlay'>
                 <div class='pop-up'>
-                    Ваше письмо было успешно отправлено!
+                    Ваш отзыв был успешно отправлен!
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
                         <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
@@ -29,18 +29,21 @@
                 </div>
             </div>
         @endif
-        @if (count($errors) > 0)
+        @if ($errors->any() || count($errorsList))
             <div id='fullscreen-overlay'>
                 <div class='pop-up'>
                     <ul class="error-list">
                         <lh>Ошибки</lh>
-                        @foreach($errors as $error)
+                        @foreach($errorsList as $error)
+                            <li class="hero-secondary">{{$error}}</li>
+                        @endforeach
+                        @foreach($errors->all() as $error)
                             <li class="hero-secondary">{{$error}}</li>
                         @endforeach
                     </ul>
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/contact")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
                     </div>
                 </div>
             </div>
@@ -72,13 +75,20 @@
             </form>
             <div class="secondary-contact-text">Отзывы пользователей</div>
             <div class="reviews-container">
+                <div class="review-buttons-container">
+                    <a href="{{url("/guestbook/reviews/download")}}"><button class="form-button">Скачать файл с отзывами</button></a>
+                    <form action="{{url("/guestbook/reviews/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
+                        @csrf
+                        <input type="file" name="text_file" accept=".inc" class="upload-input" required>
+                        <button class="form-button">Опубликовать отзывы из файла</button>
+                    </form>
+                </div>
                 @if (count($reviews) > 0)
                     @foreach($reviews as $review)
                         <div class="review-container">
                             <div class="review-header">{{$review->name}} ({{$review->email}}) {{$review->created_at}}</div>
                             <div class="review-body">{{$review->body}}</div>
                         </div>
-
                     @endforeach
                 @else
                     <div class="hero-secondary">No reviews yet</div>

@@ -31,6 +31,12 @@ Route::get('/guestbook', [GuestBookController::class, 'index']);
 
 Route::get('/guestbook/reviews', [GuestBookController::class, 'getReviews']);
 
+Route::get('/guestbook/reviews/download', [GuestBookController::class, 'downloadReviewsFile']);
+
+Route::get('/guestbook/reviews/upload', [GuestBookController::class, 'index']);
+
+Route::post('/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
+
 Route::post('/guestbook/reviews', [GuestBookController::class, 'addReview']);
 
 Route::get('/test', [TestController::class, 'index']);
