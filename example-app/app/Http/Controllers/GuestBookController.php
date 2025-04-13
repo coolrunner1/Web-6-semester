@@ -11,16 +11,29 @@ class GuestBookController extends Controller
 {
     private array $errors;
     private bool $sent;
+    private string $messagesFilePath;
 
     public function __construct() {
         $this->errors = [];
         $this->sent = false;
+        $this->messagesFilePath = storage_path('app/public/messages.inc');
     }
 
     public function index() {
         $errorsList = $this->errors;
         $success = $this->sent;
-        $reviews = Review::all()->sortByDesc("created_at");
+        $contents = explode(PHP_EOL, file_get_contents($this->messagesFilePath));
+
+        $reviews = [];
+
+        foreach ($contents as $line) {
+            $content = explode(';', $line);
+            if (count($content) !== 4) {
+                break;
+            }
+            $data = ['date' => $content[0], 'name' => $content[1], 'email' => $content[2], 'body' => $content[3]];
+            $reviews[] = $data;
+        }
 
         return view('guestbook', compact('errorsList', 'success', 'reviews'));
     }
@@ -38,26 +51,18 @@ class GuestBookController extends Controller
         $this->errors = $validation->showErrors();
         $this->sent = count($this->errors) === 0;
         if ($this->sent) {
+            $reviews = file_get_contents($this->messagesFilePath);
+            $newReview = date('Y-m-d').";".$data['name'].";".$data['email'].";".$data['body']."\n";
+            file_put_contents($this->messagesFilePath, $newReview.$reviews);
             Review::create(['name' => $data['name'], 'email' => $data['email'], 'body' => $data['body']]);
         }
         return $this->index();
     }
 
     public function downloadReviewsFile() {
-        $reviews = Review::all()->sortByDesc("created_at");
-        $content = "";
-
-        if (!count($reviews)) {
-            $content = "No reviews found";
-        }
-
-        foreach ($reviews as $review) {
-            $content .= $review->created_at.";".$review->name.";".$review->email.";".$review->body.";\n";
-        }
-
         $fileName = 'messages.inc';
 
-        return Response::make($content, 200, [
+        return Response::make(file_get_contents($this->messagesFilePath), 200, [
             'Content-Type' => 'text/plain',
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ]);
@@ -72,6 +77,7 @@ class GuestBookController extends Controller
         $file = $request->file('text_file');
 
         $validation = new FormValidation();
+        $validation->setRule("date", 'isDate');
         $validation->setRule("name", 'isName');
         $validation->setRule("email", 'isEmail');
         $validation->setRule("body", 'isNotEmpty');
@@ -83,24 +89,25 @@ class GuestBookController extends Controller
         foreach ($contents as $line) {
             $content = explode(';', $line);
 
-            if (count($content) !== 3) {
+            if (count($content) !== 4) {
                 $this->errors[] = "Был опубликован файл неверного формата";
                 return $this->index();
             }
 
-            $data = ['name' => $content[0], 'email' => $content[1], 'body' => $content[2]];
+            $data = ['date' => $content[0], 'name' => $content[1], 'email' => $content[2], 'body' => $content[3]];
 
             $validation->validate($data);
             $this->errors = $validation->showErrors();
 
-            $reviews[] = $data;
+            $reviews[] = $line;
         }
 
+        rsort($reviews);
+
         if (count($this->errors) === 0) {
-            foreach ($reviews as $review) {
-                Review::create($review);
-            }
+            file_put_contents($this->messagesFilePath, implode("\n", $reviews));
             $this->sent = true;
+            error_log("test");
         }
 
         return $this->index();

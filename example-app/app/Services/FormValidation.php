@@ -46,6 +46,10 @@ class FormValidation
         $this->rules[$fieldName] = $validatorName;
     }
 
+    public function isDate($data): bool {
+        return count(explode('-', $data)) === 3 && (bool)strtotime($data);
+    }
+
     public function validate($postArray) {
         if (!count($this->rules)) {
             return ["Отсутствуют правила для валидации"];
@@ -79,6 +83,11 @@ class FormValidation
                 case 'isAge':
                     if (!$this->isAge($postArray[$fieldName])) {
                         $this->errors[] = "{$postArray[$fieldName]} не является настоящим возрастом!";
+                    }
+                    break;
+                case 'isDate':
+                    if (!$this->isDate($postArray[$fieldName])) {
+                        $this->errors[] = "{$postArray[$fieldName]} не является настоящей датой!";
                     }
                     break;
                 default:

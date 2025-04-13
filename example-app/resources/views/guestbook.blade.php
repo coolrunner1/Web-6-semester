@@ -80,14 +80,14 @@
                     <form action="{{url("/guestbook/reviews/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
                         @csrf
                         <input type="file" name="text_file" accept=".inc" class="upload-input" required>
-                        <button class="form-button">Опубликовать отзывы из файла</button>
+                        <button class="form-button">Опубликовать из файла</button>
                     </form>
                 </div>
                 @if (count($reviews) > 0)
                     @foreach($reviews as $review)
                         <div class="review-container">
-                            <div class="review-header">{{$review->name}} ({{$review->email}}) {{$review->created_at}}</div>
-                            <div class="review-body">{{$review->body}}</div>
+                            <div class="review-header">{{$review['name']}} ({{$review['email']}}) {{$review['date']}}</div>
+                            <div class="review-body">{{$review['body']}}</div>
                         </div>
                     @endforeach
                 @else

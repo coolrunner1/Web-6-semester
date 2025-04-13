@@ -731,7 +731,7 @@ td {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .upload-input {
