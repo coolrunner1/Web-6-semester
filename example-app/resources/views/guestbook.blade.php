@@ -91,7 +91,7 @@
                         </div>
                     @endforeach
                 @else
-                    <div class="hero-secondary">No reviews yet</div>
+                    <div class="hero-secondary">Отзывы отсутствуют</div>
                 @endif
             </div>
             <x-footer/>

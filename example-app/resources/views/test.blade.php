@@ -139,6 +139,21 @@
                     <button id="but3" type="reset">Очистить</button>
                 </div>
             </form>
+            <div class="secondary-contact-text">Результаты выполнения теста</div>
+            <div class="results-container">
+                @if (count($results) > 0)
+                    @foreach($results as $result)
+                        <div class="result-container">
+                            <div class="result-header">{{$result->name}} ({{$result->group}}) {{$result->created_at}}</div>
+                            <div class={{$result->answer1IsCorrect ? "valid-input" : "invalid-input"}}>Вопрос №1: {{$result->answer1}}</div>
+                            <div class={{$result->answer2IsCorrect ? "valid-input" : "invalid-input"}}>Вопрос №2: {{$result->answer2}}</div>
+                            <div class={{$result->answer3IsCorrect ? "valid-input" : "invalid-input"}}>Вопрос №3: {{$result->answer3}}</div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="hero-secondary">Результаты тестов отсутствуют</div>
+                @endif
+            </div>
         </div>
         <x-footer/>
     </body>

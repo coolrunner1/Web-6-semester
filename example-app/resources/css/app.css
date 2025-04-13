@@ -257,7 +257,7 @@ img {
     border-color: #e5e7eb;
 }
 
-#survey-form, .pop-up, .reviews-container {
+#survey-form, .pop-up, .reviews-container, .results-container {
     background-color: #3882f6;
     border-style: solid;
     border-color: #3882f6;
@@ -696,7 +696,7 @@ td {
     flex-direction: column;
 }
 
-.reviews-container {
+.reviews-container, .results-container {
     display: flex;
     gap: 20px;
     text-align: center;
@@ -705,7 +705,7 @@ td {
     justify-content: center;
 }
 
-.review-container {
+.review-container, .result-container {
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -718,11 +718,11 @@ td {
     font-size: 15px;
 }
 
-.review-header {
+.review-header, .result-header {
     color: #0a0a0a;
 }
 
-.review-body {
+.review-body, .result-body {
     color: #0a0a0a;
     font-size: 18px;
 }
