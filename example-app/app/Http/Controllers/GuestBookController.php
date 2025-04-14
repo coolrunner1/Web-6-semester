@@ -54,7 +54,6 @@ class GuestBookController extends Controller
             $reviews = file_get_contents($this->messagesFilePath);
             $newReview = date('Y-m-d').";".$data['name'].";".$data['email'].";".$data['body']."\n";
             file_put_contents($this->messagesFilePath, $newReview.$reviews);
-            Review::create(['name' => $data['name'], 'email' => $data['email'], 'body' => $data['body']]);
         }
         return $this->index();
     }
@@ -112,6 +111,6 @@ class GuestBookController extends Controller
     }
 
     public function getReviews() {
-        return Review::all();
+        //return Review::all();
     }
 }
