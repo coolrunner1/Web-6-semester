@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GuestBookController;
@@ -42,3 +43,11 @@ Route::post('/guestbook/reviews', [GuestBookController::class, 'addReview']);
 Route::get('/test', [TestController::class, 'index']);
 
 Route::post('/test', [TestController::class, 'store']);
+
+Route::get('/blog', [BlogController::class, 'index']);
+
+Route::get('/blog/edit', [BlogController::class, 'blogEditIndex']);
+
+Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
+
+Route::post('/blog/add', [BlogController::class, 'addBlogPost']);

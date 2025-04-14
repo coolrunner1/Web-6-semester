@@ -53,7 +53,8 @@
                 <div class="input-container" id="name-container">
                     <label id="name-label" for="name">
                         <span class="label-text">Фамилия Имя Отчество</span>
-                        <input id="name" name="name" type="text" placeholder="Введите своё имя" required /></label>
+                        <input id="name" name="name" type="text" placeholder="Введите своё имя" required />
+                    </label>
                 </div>
                 <div class="input-container" id="email-container">
                     <label id="email-label" for="email">
