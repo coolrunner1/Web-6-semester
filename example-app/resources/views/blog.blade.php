@@ -36,6 +36,7 @@
                             <div class="blog-body">{{$blogPost->body}}</div>
                         </div>
                     @endforeach
+                    {{ $blogPosts->links() }}
                 @else
                     <div class="hero-secondary">Посты отсутствуют</div>
                 @endif

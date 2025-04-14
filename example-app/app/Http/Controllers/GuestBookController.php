@@ -69,7 +69,6 @@ class GuestBookController extends Controller
     }
 
     public function uploadReviewFromFile(Request $request) {
-        error_log("test");
         $request->validate([
             'text_file' => 'required|file|mimes:txt|max:128',
         ]);
@@ -107,7 +106,6 @@ class GuestBookController extends Controller
         if (count($this->errors) === 0) {
             file_put_contents($this->messagesFilePath, implode("\n", $reviews));
             $this->sent = true;
-            error_log("test");
         }
 
         return $this->index();

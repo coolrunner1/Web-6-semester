@@ -83,14 +83,15 @@
             <div class="secondary-contact-text">Записи блога</div>
             <div class="blogs-container">
                 <div class="blog-buttons-container">
-                    <a href="{{url("/guestbook/reviews/download")}}"><button class="form-button">Скачать файл с записями блога</button></a>
-                    <form action="{{url("/guestbook/reviews/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
+                    <a href="{{url("/blog/download")}}"><button class="form-button">Скачать файл с записями блога</button></a>
+                    <form action="{{url("/blog/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
                         @csrf
-                        <input type="file" name="text_file" accept="text/csv" class="upload-input" required>
+                        <input type="file" name="csv_file" accept=".csv" class="upload-input" required>
                         <button class="form-button">Опубликовать из файла</button>
                     </form>
                 </div>
                 @if (count($blogPosts) > 0)
+                    {{ $blogPosts->links() }}
                     @foreach($blogPosts as $blogPost)
                         <div class="blog-container">
                             <h1 class="hero-header text-black">{{$blogPost->topic}}</h1>
@@ -104,7 +105,7 @@
                             <div class="blog-body">{{$blogPost->body}}</div>
                         </div>
                     @endforeach
-                        {{ $blogPosts->links() }}
+                    {{ $blogPosts->links() }}
                 @else
                     <div class="hero-secondary">Посты отсутствуют</div>
                 @endif

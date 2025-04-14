@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Services\FormValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class BlogController extends Controller
 {
@@ -30,10 +31,6 @@ class BlogController extends Controller
 
     public function addBlogPost(Request $request) {
         $data = $request->all();
-
-        foreach ($data as $key => $value) {
-            error_log($key.' '.$value);
-        }
 
         $request->validate([
             'image' => [
@@ -70,5 +67,93 @@ class BlogController extends Controller
         }
 
         return $this->blogEditIndex();
+    }
+
+    public function addBlogPostsFromFile(Request $request) {
+        $request->validate([
+            'csv_file' => 'required|file|mimes:csv|max:2048',
+        ]);
+
+        $file = $request->file('csv_file');
+
+        $validation = new FormValidation();
+
+        $validation->setRule("topic", 'isNotEmpty');
+        $validation->setRule("author", 'isName');
+        $validation->setRule("body", 'isNotEmpty');
+        $validation->setRule("created_at", 'isDate');
+
+        $handle = fopen($file, 'r');
+        $headerChecked = false;
+        $rows = [];
+
+        while (($row = fgetcsv($handle, 1000, ',')) !== false) {
+
+            if (count($row) < 4) continue;
+
+            if (!$headerChecked) {
+                if ($row[0] !== 'topic' || $row[1] !== 'body' || $row[2] !== 'author' || $row[3] !== 'created_at') {
+                    $this->errors[] = 'Был загружен неверный файл';
+                    return $this->blogEditIndex();
+                }
+                $headerChecked = true;
+                continue;
+            }
+
+            $data = ['topic' => $row[0], 'body' => $row[1], 'author' => $row[2], 'created_at' => $row[3]];
+
+            $validation->validate($data);
+            $rows[] = $data;
+        }
+
+        fclose($handle);
+
+        $this->errors = $validation->showErrors();
+
+        if (count($this->errors) === 0) {
+            $this->sent = true;
+            foreach ($rows as $row) {
+                Blog::create($row);
+            }
+        }
+
+        return $this->blogEditIndex();
+    }
+
+    public function downloadBlogPostsFile(Request $request) {
+        // Название файла
+        $fileName = 'blog_posts.csv';
+
+        $posts = Blog::all()->sortByDesc('created_at');
+
+        $csvData = [
+            ['topic', 'body', 'author', 'created_at'],
+        ];
+
+        foreach ($posts as $post) {
+            $csvData[] = [
+                $post->topic,
+                $post->body,
+                $post->author,
+                $post->created_at,
+            ];
+        }
+
+
+        $handle = fopen('php://temp', 'r+');
+
+        foreach ($csvData as $row) {
+            fputcsv($handle, $row);
+        }
+
+        rewind($handle);
+
+        $content = stream_get_contents($handle);
+        fclose($handle);
+
+        return Response::make($content, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename=\"$fileName\"",
+        ]);
     }
 }

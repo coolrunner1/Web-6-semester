@@ -51,3 +51,9 @@ Route::get('/blog/edit', [BlogController::class, 'blogEditIndex']);
 Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
 
 Route::post('/blog/add', [BlogController::class, 'addBlogPost']);
+
+Route::get('/blog/upload', [BlogController::class, 'blogEditIndex']);
+
+Route::post('/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
+
+Route::get('/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
