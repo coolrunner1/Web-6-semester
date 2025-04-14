@@ -23,9 +23,6 @@ class ContactController extends Controller
 
     public function store(Request $request) {
         $data = $request->all();
-        foreach ($data as $fieldName => $value) {
-            error_log("{$fieldName}: {$value}");
-        }
 
         $validation = new ContactFormValidation();
 

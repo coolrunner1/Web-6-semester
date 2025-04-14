@@ -37,7 +37,16 @@
             <a href="{{ url('/contact') }}" class="hero-secondary-but" title="Contacts">Контакт</a>
         </div>
         <div class="nav-but-container">
+            <a href="{{ url('/guestbook') }}" class="hero-secondary-but" title="GuestBook">Гостевая Книга</a>
+        </div>
+        <div class="nav-but-container">
             <a href="{{ url('/test') }}" class="hero-secondary-but" title="Test">Тест</a>
+        </div>
+        <div class="nav-but-container">
+            <a href="{{ url('/blog/edit') }}" class="hero-secondary-but" title="Edit blog">Редактировать блог</a>
+        </div>
+        <div class="nav-but-container">
+            <a href="{{ url('/blog') }}" class="hero-secondary-but" title="Blog">Мой Блог</a>
         </div>
         <!-- Will be used in lab #10
         <div class="nav-but-container">

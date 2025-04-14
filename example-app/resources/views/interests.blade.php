@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Моя страница</title>
-        <link rel="icon" sizes="any" type="image/svg+xml" href="{{url('storage/icons/home.png')}}">
+        <x-title/>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

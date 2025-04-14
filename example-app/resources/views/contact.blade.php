@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Моя страница</title>
-        <link rel="icon" sizes="any" type="image/svg+xml" href="{{url('storage/icons/home.png')}}">
+        <x-title/>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -54,7 +53,8 @@
                 <div class="input-container" id="name-container">
                     <label id="name-label" for="name">
                         <span class="label-text">Фамилия Имя Отчество</span>
-                        <input id="name" name="name" type="text" placeholder="Введите своё имя" required /></label>
+                        <input id="name" name="name" type="text" placeholder="Введите своё имя" required />
+                    </label>
                 </div>
                 <div class="input-container" id="email-container">
                     <label id="email-label" for="email">
