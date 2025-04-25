@@ -22,7 +22,7 @@
                 <div class="top-div">
                     <div class="hero">Меня зовут Козловцев Игорь</div>
                     <div class="hero-secondary">Я студент группы ИС/б-22-1-о</div>
-                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №8 - Исследование архитектуры MVC приложения и возможностей обработки данных HTML-форм на стороне сервера с использованием языка PHP</div>
+                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №10 - Исследование механизма сессий в PHP</div>
                 </div>
                 <img src="{{url('storage/home/phplogo.jpg')}}" title="PHP" alt="php" width="600" height="330">
             </div>

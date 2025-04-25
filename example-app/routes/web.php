@@ -57,3 +57,11 @@ Route::get('/blog/upload', [BlogController::class, 'blogEditIndex']);
 Route::post('/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
 
 Route::get('/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
+
+Route::get("/login", function () {
+    return view("login");
+});
+
+Route::get("/registration", function () {
+    return view("registration");
+});

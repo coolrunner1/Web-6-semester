@@ -277,7 +277,7 @@ img {
     border-color: #e5e7eb;
 }
 
-#survey-form, .pop-up, .reviews-container, .results-container, .blogs-container {
+#survey-form, .pop-up, .reviews-container, .results-container, .blogs-container, .login-form {
     background-color: #3882f6;
     border-style: solid;
     border-color: #3882f6;
@@ -801,4 +801,25 @@ td {
 
 .svg-link:visited {
     color: white;
+}
+
+.login-form {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.color-white {
+    color: white;
+}
+
+.login-form-link:hover {
+    color: #a8c9fb;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+.login-form > .bottom-buttons > button {
+    max-width: 200px;
+    margin-top: 20px;
 }
