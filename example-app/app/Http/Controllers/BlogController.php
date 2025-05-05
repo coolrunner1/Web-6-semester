@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Services\FormValidation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class BlogController extends Controller
@@ -23,13 +24,29 @@ class BlogController extends Controller
     }
 
     public function blogEditIndex() {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        if (!Auth::user()->hasRole(1)) {
+            return redirect('/');
+        }
+
         $errorsList = $this->errors;
         $success = $this->sent;
         $blogPosts = Blog::orderBy('created_at', 'desc')->paginate(10);
-        return view('blogedit', compact('errorsList', 'success', 'blogPosts'));
+        return view('admin.blogedit', compact('errorsList', 'success', 'blogPosts'));
     }
 
     public function store(Request $request) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        if (!Auth::user()->hasRole(1)) {
+            return redirect('/');
+        }
+
         $data = $request->all();
 
         $request->validate([
@@ -70,6 +87,14 @@ class BlogController extends Controller
     }
 
     public function addBlogPostsFromFile(Request $request) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        if (!Auth::user()->hasRole(1)) {
+            return redirect('/');
+        }
+
         $request->validate([
             'csv_file' => 'required|file|mimes:csv|max:2048',
         ]);
@@ -121,7 +146,6 @@ class BlogController extends Controller
     }
 
     public function downloadBlogPostsFile(Request $request) {
-        // Название файла
         $fileName = 'blog_posts.csv';
 
         $posts = Blog::all()->sortByDesc('created_at');

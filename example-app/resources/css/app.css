@@ -277,7 +277,7 @@ img {
     border-color: #e5e7eb;
 }
 
-#survey-form, .pop-up, .reviews-container, .results-container, .blogs-container, .login-form {
+#survey-form, .pop-up, .reviews-container, .results-container, .blogs-container, .login-form, .page-controls-container {
     background-color: #3882f6;
     border-style: solid;
     border-color: #3882f6;
@@ -822,4 +822,8 @@ td {
 .login-form > .bottom-buttons > button {
     max-width: 200px;
     margin-top: 20px;
+}
+
+.page-controls-container {
+    max-width: 200px;
 }

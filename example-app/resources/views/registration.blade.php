@@ -53,6 +53,11 @@
                         <input id="name" name="name" type="text" placeholder="Введите своё имя" required />
                     </span>
                 </label>
+                <label id="login-label" for="login" class="test"><span class="label-text">Логин</span>
+                    <span class="input-container input-container-test" id="login-container">
+                        <input id="login" name="login" type="text" placeholder="Введите логин" required />
+                    </span>
+                </label>
                 <label id="email-label" for="email" class="test">
                     <span class="label-text">Электронная почта</span>
                     <span class="input-container input-container-test" id="email-container">

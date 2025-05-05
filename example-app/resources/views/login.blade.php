@@ -38,9 +38,9 @@
                 @csrf <!-- {{ csrf_field() }} -->
                 <div class="information color-white">Логин</div>
                 <div>Не зарегистрированы? <a href="{{url("/register")}}" class="hero-secondary-but login-form-link">Зарегистрируйтесь сейчас!</a></div>
-                <label id="login-label" for="email" class="test"><span class="label-text">Электронная почта</span>
-                    <span class="input-container input-container-test" id="email-container">
-                        <input id="email" name="email" type="text" placeholder="Введите почту" required />
+                <label id="login-label" for="login" class="test"><span class="label-text">Логин или почта</span>
+                    <span class="input-container input-container-test" id="login-container">
+                        <input id="login" name="login" type="text" placeholder="Введите логин или почту" required />
                     </span>
                 </label>
                 <label id="password-label" for="name" class="test"><span class="label-text">Пароль</span>

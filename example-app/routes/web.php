@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GuestBookController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\InterestsController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -47,7 +49,7 @@ Route::post('/test', [TestController::class, 'store']);
 
 Route::get('/blog', [BlogController::class, 'index']);
 
-Route::get('/blog/edit', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog', [BlogController::class, 'blogEditIndex']);
 
 Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
 
@@ -68,3 +70,7 @@ Route::get("/register", [AuthController::class, 'showRegister']);
 Route::post("/register", [AuthController::class, 'register']);
 
 Route::get("/logout", [AuthController::class, "logout"]);
+
+Route::get("/admin", [AdminController::class, 'index']);
+
+Route::get("/admin/history", [HistoryController::class, 'index']);

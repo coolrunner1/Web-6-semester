@@ -16,30 +16,14 @@
         @endif
     </head>
     <body id="main-page">
-        <x-navbar/>
+        <x-admin-navbar/>
         <div class="content-container">
             <div id="top">
                 <div class="top-div">
-                    @auth
-                        <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
-                        <div class="hero-secondary">Меня зовут Козловцев Игорь</div>
-                    @endauth
-                    @guest
-                            <div class="hero">Меня зовут Козловцев Игорь</div>
-                    @endguest
-                    <div class="hero-secondary">Я студент группы ИС/б-22-1-о</div>
+                    <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
                     <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №10 - Исследование механизма сессий в PHP</div>
                 </div>
                 <img src="{{url('storage/home/phplogo.jpg')}}" title="PHP" alt="php" width="600" height="330">
-            </div>
-            <div id="container-with-box">
-                <div class="content-box">
-                    <div>
-                        <div class="hero-header">Есть предложения по улучшению сайта?</div>
-                        <div class="hero-secondary">Заполните данную форму!</div>
-                    </div>
-                    <a href="{{ url('/contact') }}"><button id="but2">Заполнить</button></a>
-                </div>
             </div>
             <x-footer/>
         </div>

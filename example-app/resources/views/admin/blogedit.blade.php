@@ -17,14 +17,14 @@
 
     </head>
     <body id="contact">
-        <x-navbar/>
+        <x-admin-navbar/>
         @if ($success)
             <div id='fullscreen-overlay'>
                 <div class='pop-up'>
                     Ваш пост был успешно отправлен!
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/blog/edit")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        <a href="{{url("/admin/blog")}}"><button id='no-popup'>Вернуться к форме</button></a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     </ul>
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/blog/edit")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        <a href="{{url("/admin/blog")}}"><button id='no-popup'>Вернуться к форме</button></a>
                     </div>
                 </div>
             </div>

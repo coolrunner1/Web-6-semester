@@ -16,13 +16,18 @@ class AuthController extends Controller
     }
 
     public function showRegister() {
+        if (Auth::check()  && !$this->success) {
+            return redirect("/");
+        }
         $success = $this->success;
         return view('registration', compact('success'));
     }
 
     public function showLogin() {
-        $success = false;
-        return view('login', compact('success'));
+        if (Auth::check()) {
+            return redirect("/");
+        }
+        return view('login');
     }
 
     public function register(Request $request) {
@@ -33,6 +38,7 @@ class AuthController extends Controller
                         $fail("$value не является ФИО!");
                     }
                 }],
+            'login' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -43,17 +49,27 @@ class AuthController extends Controller
 
         $this->success = true;
 
-        return redirect("/register");
+        return $this->showRegister();
     }
 
     public function login(Request $request) {
+        $login = $request->input('login');
+        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+
         $validated = $request->validate([
-            'email' => 'required|email',
+            'login' => 'required|string',
             'password' => 'required|string|min:8',
         ]);
 
-        if (Auth::attempt($validated)) {
+        if (Auth::attempt([
+            $field => $login,
+            'password' => $validated['password']
+        ])) {
             $request->session()->regenerate();
+
+            if (Auth::user()->hasRole(1)) {
+                return redirect("/admin");
+            }
 
             return redirect('/');
         }
