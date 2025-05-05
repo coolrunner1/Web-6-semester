@@ -825,5 +825,5 @@ td {
 }
 
 .page-controls-container {
-    max-width: 200px;
+    width: auto;
 }
