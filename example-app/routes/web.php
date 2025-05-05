@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
@@ -38,7 +39,7 @@ Route::get('/guestbook/reviews/upload', [GuestBookController::class, 'index']);
 
 Route::post('/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
 
-Route::post('/guestbook/reviews', [GuestBookController::class, 'addReview']);
+Route::post('/guestbook/reviews', [GuestBookController::class, 'store']);
 
 Route::get('/test', [TestController::class, 'index']);
 
@@ -50,7 +51,7 @@ Route::get('/blog/edit', [BlogController::class, 'blogEditIndex']);
 
 Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
 
-Route::post('/blog/add', [BlogController::class, 'addBlogPost']);
+Route::post('/blog/add', [BlogController::class, 'store']);
 
 Route::get('/blog/upload', [BlogController::class, 'blogEditIndex']);
 
@@ -58,10 +59,12 @@ Route::post('/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
 
 Route::get('/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
 
-Route::get("/login", function () {
-    return view("login");
-});
+Route::get("/login", [AuthController::class, "showLogin"]);
 
-Route::get("/registration", function () {
-    return view("registration");
-});
+Route::post("/login", [AuthController::class, "login"]);
+
+Route::get("/register", [AuthController::class, 'showRegister']);
+
+Route::post("/register", [AuthController::class, 'register']);
+
+Route::get("/logout", [AuthController::class, "logout"]);

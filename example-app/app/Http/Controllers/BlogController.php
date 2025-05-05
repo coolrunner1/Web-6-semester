@@ -29,7 +29,7 @@ class BlogController extends Controller
         return view('blogedit', compact('errorsList', 'success', 'blogPosts'));
     }
 
-    public function addBlogPost(Request $request) {
+    public function store(Request $request) {
         $data = $request->all();
 
         $request->validate([

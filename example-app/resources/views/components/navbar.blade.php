@@ -55,7 +55,7 @@
         @endguest
         @auth
             <div class="nav-but-container">
-                <a href="" class="hero-secondary-but" title="Logout">Выйти</a>
+                <a href="{{ url("/logout") }}" class="hero-secondary-but" title="Logout">Выйти</a>
             </div>
         @endauth
         <!-- Will be used in lab #10
