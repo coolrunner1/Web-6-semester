@@ -24,14 +24,6 @@ class BlogController extends Controller
     }
 
     public function blogEditIndex() {
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
-
-        if (!Auth::user()->hasRole(1)) {
-            return redirect('/');
-        }
-
         $errorsList = $this->errors;
         $success = $this->sent;
         $blogPosts = Blog::orderBy('created_at', 'desc')->paginate(10);
@@ -39,14 +31,6 @@ class BlogController extends Controller
     }
 
     public function store(Request $request) {
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
-
-        if (!Auth::user()->hasRole(1)) {
-            return redirect('/');
-        }
-
         $data = $request->all();
 
         $request->validate([
@@ -87,14 +71,6 @@ class BlogController extends Controller
     }
 
     public function addBlogPostsFromFile(Request $request) {
-        if (!Auth::check()) {
-            return redirect('/login');
-        }
-
-        if (!Auth::user()->hasRole(1)) {
-            return redirect('/');
-        }
-
         $request->validate([
             'csv_file' => 'required|file|mimes:csv|max:2048',
         ]);

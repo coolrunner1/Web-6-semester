@@ -51,7 +51,7 @@
         <div class="guestbook-content-container">
             <div class="information">Редактирование блога</div>
             <div class="secondary-contact-text">Добавьте новую запись в блог</div>
-            <form id="survey-form" enctype="multipart/form-data" action="{{url("/blog/add")}}" method="POST">
+            <form id="survey-form" enctype="multipart/form-data" action="{{url("/admin/blog/add")}}" method="POST">
                 @csrf <!-- {{ csrf_field() }} -->
                 <div class="input-container" id="author-container">
                     <label id="author-label" for="author">
@@ -83,8 +83,8 @@
             <div class="secondary-contact-text">Записи блога</div>
             <div class="blogs-container">
                 <div class="blog-buttons-container">
-                    <a href="{{url("/blog/download")}}"><button class="form-button">Скачать файл с записями блога</button></a>
-                    <form action="{{url("/blog/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
+                    <a href="{{url("/admin/blog/download")}}"><button class="form-button">Скачать файл с записями блога</button></a>
+                    <form action="{{url("/admin/blog/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
                         @csrf
                         <input type="file" name="csv_file" accept=".csv" class="upload-input" required>
                         <button class="form-button">Опубликовать из файла</button>

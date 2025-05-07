@@ -2,7 +2,7 @@
     <div><a href="{{ url('/admin') }}" class="hero-header">Страница админа</a></div>
     <div class="small-items">
         <div class="nav-but-container">
-            <a href="{{ url('/guestbook') }}" class="hero-secondary-but" title="GuestBook">Гостевая Книга</a>
+            <a href="{{ url('/admin/guestbook') }}" class="hero-secondary-but" title="GuestBook">Гостевая Книга</a>
         </div>
         <div class="nav-but-container">
             <a href="{{ url('/admin/blog') }}" class="hero-secondary-but" title="Edit blog">Редактировать блог</a>

@@ -20,7 +20,9 @@
         <div class="content-container">
             <div id="top">
                 <div class="top-div">
-                    <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
+                    @auth
+                        <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
+                    @endauth
                     <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №10 - Исследование механизма сессий в PHP</div>
                 </div>
                 <img src="{{url('storage/home/phplogo.jpg')}}" title="PHP" alt="php" width="600" height="330">

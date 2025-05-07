@@ -35,13 +35,15 @@ Route::get('/guestbook', [GuestBookController::class, 'index']);
 
 Route::get('/guestbook/reviews', [GuestBookController::class, 'getReviews']);
 
-Route::get('/guestbook/reviews/download', [GuestBookController::class, 'downloadReviewsFile']);
-
-Route::get('/guestbook/reviews/upload', [GuestBookController::class, 'index']);
-
-Route::post('/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
-
 Route::post('/guestbook/reviews', [GuestBookController::class, 'store']);
+
+Route::get('/admin/guestbook', [GuestBookController::class, 'index']);
+
+Route::get('/admin/guestbook/reviews/download', [GuestBookController::class, 'downloadReviewsFile']);
+
+Route::get('/admin/guestbook/reviews/upload', [GuestBookController::class, 'index']);
+
+Route::post('/admin/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
 
 Route::get('/test', [TestController::class, 'index']);
 
@@ -51,15 +53,15 @@ Route::get('/blog', [BlogController::class, 'index']);
 
 Route::get('/admin/blog', [BlogController::class, 'blogEditIndex']);
 
-Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog/add', [BlogController::class, 'blogEditIndex']);
 
-Route::post('/blog/add', [BlogController::class, 'store']);
+Route::post('/admin/blog/add', [BlogController::class, 'store']);
 
-Route::get('/blog/upload', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog/upload', [BlogController::class, 'blogEditIndex']);
 
-Route::post('/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
+Route::post('/admin/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
 
-Route::get('/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
+Route::get('/admin/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
 
 Route::get("/login", [AuthController::class, "showLogin"]);
 
