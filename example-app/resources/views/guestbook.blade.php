@@ -24,7 +24,11 @@
                     Ваш отзыв был успешно отправлен!
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @if (auth()->check() && auth()->user()->hasRole(1))
+                            <a href="{{url("/admin/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @else
+                            <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -43,7 +47,11 @@
                     </ul>
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @if (auth()->check() && auth()->user()->hasRole(1))
+                            <a href="{{url("/admin/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @else
+                            <a href="{{url("/guestbook")}}"><button id='no-popup'>Вернуться к форме</button></a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -75,14 +83,16 @@
             </form>
             <div class="secondary-contact-text">Отзывы пользователей</div>
             <div class="reviews-container">
-                <div class="review-buttons-container">
-                    <a href="{{url("/guestbook/reviews/download")}}"><button class="form-button">Скачать файл с отзывами</button></a>
-                    <form action="{{url("/guestbook/reviews/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
-                        @csrf
-                        <input type="file" name="text_file" accept=".inc" class="upload-input" required>
-                        <button class="form-button">Опубликовать из файла</button>
-                    </form>
-                </div>
+                @if (auth()->check() && auth()->user()->hasRole(1))
+                    <div class="review-buttons-container">
+                        <a href="{{url("/admin/guestbook/reviews/download")}}"><button class="form-button">Скачать файл с отзывами</button></a>
+                        <form action="{{url("/admin/guestbook/reviews/upload")}}" method="POST" enctype="multipart/form-data" class="upload-form">
+                            @csrf
+                            <input type="file" name="text_file" accept=".inc" class="upload-input" required>
+                            <button class="form-button">Опубликовать из файла</button>
+                        </form>
+                    </div>
+                @endif
                 @if (count($reviews) > 0)
                     @foreach($reviews as $review)
                         <div class="review-container">

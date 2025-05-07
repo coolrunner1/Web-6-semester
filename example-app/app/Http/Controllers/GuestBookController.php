@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Review;
 use App\Services\FormValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -38,7 +37,7 @@ class GuestBookController extends Controller
         return view('guestbook', compact('errorsList', 'success', 'reviews'));
     }
 
-    public function addReview(Request $request) {
+    public function store(Request $request) {
         $data = $request->all();
 
         $validation = new FormValidation();

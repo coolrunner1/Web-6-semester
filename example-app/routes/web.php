@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GuestBookController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\InterestsController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -32,13 +35,15 @@ Route::get('/guestbook', [GuestBookController::class, 'index']);
 
 Route::get('/guestbook/reviews', [GuestBookController::class, 'getReviews']);
 
-Route::get('/guestbook/reviews/download', [GuestBookController::class, 'downloadReviewsFile']);
+Route::post('/guestbook/reviews', [GuestBookController::class, 'store']);
 
-Route::get('/guestbook/reviews/upload', [GuestBookController::class, 'index']);
+Route::get('/admin/guestbook', [GuestBookController::class, 'index']);
 
-Route::post('/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
+Route::get('/admin/guestbook/reviews/download', [GuestBookController::class, 'downloadReviewsFile']);
 
-Route::post('/guestbook/reviews', [GuestBookController::class, 'addReview']);
+Route::get('/admin/guestbook/reviews/upload', [GuestBookController::class, 'index']);
+
+Route::post('/admin/guestbook/reviews/upload', [GuestBookController::class, 'uploadReviewFromFile']);
 
 Route::get('/test', [TestController::class, 'index']);
 
@@ -46,14 +51,28 @@ Route::post('/test', [TestController::class, 'store']);
 
 Route::get('/blog', [BlogController::class, 'index']);
 
-Route::get('/blog/edit', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog', [BlogController::class, 'blogEditIndex']);
 
-Route::get('/blog/add', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog/add', [BlogController::class, 'blogEditIndex']);
 
-Route::post('/blog/add', [BlogController::class, 'addBlogPost']);
+Route::post('/admin/blog/add', [BlogController::class, 'store']);
 
-Route::get('/blog/upload', [BlogController::class, 'blogEditIndex']);
+Route::get('/admin/blog/upload', [BlogController::class, 'blogEditIndex']);
 
-Route::post('/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
+Route::post('/admin/blog/upload', [BlogController::class, 'addBlogPostsFromFile']);
 
-Route::get('/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
+Route::get('/admin/blog/download', [BlogController::class, 'downloadBlogPostsFile']);
+
+Route::get("/login", [AuthController::class, "showLogin"]);
+
+Route::post("/login", [AuthController::class, "login"]);
+
+Route::get("/register", [AuthController::class, 'showRegister']);
+
+Route::post("/register", [AuthController::class, 'register']);
+
+Route::get("/logout", [AuthController::class, "logout"]);
+
+Route::get("/admin", [AdminController::class, 'index']);
+
+Route::get("/admin/history", [HistoryController::class, 'index']);
