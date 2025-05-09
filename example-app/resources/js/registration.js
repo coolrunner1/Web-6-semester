@@ -5,15 +5,15 @@ loginInput.addEventListener('blur', () => {
     if (!login) {
         return;
     }
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(xhttp.responseText)
-            addLoginAvailability(xhttp.responseText);
+            console.log(xhr.responseText)
+            addLoginAvailability(xhr.responseText);
         }
     };
-    xhttp.open("GET", `http://${window.location.host}/api/check-login?login=${login}`, true);
-    xhttp.send();
+    xhr.open("POST", `http://${window.location.host}/api/check-login`, true);
+    xhr.send(login);
 });
 
 const addLoginAvailability = (textContent) => {

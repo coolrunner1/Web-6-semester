@@ -8,4 +8,4 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get("/check-login", [AuthController::class, 'checkLoginAvailability']);
+Route::post("/check-login", [AuthController::class, 'checkLoginAvailability']);
