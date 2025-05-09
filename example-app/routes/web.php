@@ -76,3 +76,7 @@ Route::get("/logout", [AuthController::class, "logout"]);
 Route::get("/admin", [AdminController::class, 'index']);
 
 Route::get("/admin/history", [HistoryController::class, 'index']);
+
+Route::get("/history", function () {
+    return view('history');
+});

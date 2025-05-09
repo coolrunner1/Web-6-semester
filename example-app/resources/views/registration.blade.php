@@ -15,8 +15,10 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
-        <script src="../js/jquery-3.7.1.min.js"></script>
-        <script src="../js/registration.js" defer></script>
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
+        @vite('resources/js/registration.js')
     </head>
     <body id="contact">
         <x-navbar/>

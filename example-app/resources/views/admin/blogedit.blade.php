@@ -15,6 +15,9 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/erase.js')
+        @vite('resources/js/timer.js')
     </head>
     <body id="contact">
         <x-admin-navbar/>
@@ -77,7 +80,7 @@
                 </label>
                 <div class="bottom-buttons">
                     <button id="but2" type="submit">Отправить</button>
-                    <button id="but3" type="reset">Очистить</button>
+                    <button id="but3" type="button">Очистить</button>
                 </div>
             </form>
             <div class="secondary-contact-text">Записи блога</div>

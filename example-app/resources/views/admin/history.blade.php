@@ -14,6 +14,9 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/timer.js')
     </head>
     <body>
         <x-navbar />

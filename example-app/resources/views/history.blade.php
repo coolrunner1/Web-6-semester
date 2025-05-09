@@ -16,19 +16,21 @@
         @endif
 
         @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
         @vite('resources/js/timer.js')
+        @vite('resources/js/history.js')
     </head>
-    <body id="main-page">
-        <x-admin-navbar/>
+    <body>
+        <x-navbar />
         <div class="content-container">
-            <div id="top">
-                <div class="top-div">
-                    @auth
-                        <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
-                    @endauth
-                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №11 - Исследование возможностей асинхронного взаимодействия с сервером. Технология AJAX</div>
+            <div class="information">История посещений</div>
+            <div id="history-container">
+                <div id="session-storage-stats">
+                    <button id="get-session-storage-stats">Получить сведения о посещённых страницах за эту сессию</button>
                 </div>
-                <img src="{{url('storage/home/ajax.gif')}}" title="AJAX" alt="ajax" width="600" height="330">
+                <div id="cookie-storage-stats">
+                    <button id="get-cookie-storage-stats">Получить сведения о посещённых страницах за всё время</button>
+                </div>
             </div>
             <x-footer/>
         </div>

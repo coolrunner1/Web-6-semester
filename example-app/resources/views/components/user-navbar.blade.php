@@ -45,6 +45,9 @@
         <div class="nav-but-container">
             <a href="{{ url('/blog') }}" class="hero-secondary-but" title="Blog">Мой Блог</a>
         </div>
+        <div class="nav-but-container">
+            <a href="{{ url('/history') }}" class="hero-secondary-but" title="View history">История</a>
+        </div>
         @guest
             <div class="nav-but-container">
                 <a href="{{ url('/login') }}" class="hero-secondary-but" title="Login">Логин</a>

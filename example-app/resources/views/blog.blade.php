@@ -15,6 +15,9 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
     </head>
     <body>
         <x-navbar/>
