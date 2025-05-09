@@ -14,6 +14,9 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        <script src="../js/jquery-3.7.1.min.js"></script>
+        <script src="../js/registration.js" defer></script>
     </head>
     <body id="contact">
         <x-navbar/>

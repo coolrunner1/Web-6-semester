@@ -23,9 +23,9 @@
                     @auth
                         <div class="hero">Добро пожаловать, {{auth()->user()->name}}</div>
                     @endauth
-                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №10 - Исследование механизма сессий в PHP</div>
+                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №11 - Исследование возможностей асинхронного взаимодействия с сервером. Технология AJAX</div>
                 </div>
-                <img src="{{url('storage/home/phplogo.jpg')}}" title="PHP" alt="php" width="600" height="330">
+                <img src="{{url('storage/home/ajax.gif')}}" title="AJAX" alt="ajax" width="600" height="330">
             </div>
             <x-footer/>
         </div>
