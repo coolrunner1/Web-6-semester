@@ -685,9 +685,7 @@ td {
 }
 
 .pop-up-tip {
-    color: black;
     font-weight: bold;
-    border-color: #ffffff;
     margin-left: 22vw;
     max-width: 35vw;
     margin-right: 30px;
@@ -826,4 +824,8 @@ td {
 
 .page-controls-container {
     width: auto;
+}
+
+#login-tip {
+    margin: 0 0 0 15%;
 }

@@ -1,13 +1,5 @@
 const inputTags=["name", "email", "number", "question1"];
 
-const validateEmailString = (email) => {
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-};
-
 const displayErrorMessage = (input, messageText) => {
     const overlay = $('<div id="'+input+'-error" class="overlay overlay-error">' +
         '<div class="content-box error-message">'+messageText+'</div></div>');
