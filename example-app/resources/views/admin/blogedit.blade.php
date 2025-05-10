@@ -106,6 +106,20 @@
                                 <img src="{{ url("storage/blog/placeholder.png") }}" alt="placeholder"/>
                             @endif
                             <div class="blog-body">{{$blogPost->body}}</div>
+                            <h3 class="hero-header text-black">Комментарии</h3>
+                            <div id="post-comments-{{$blogPost->id}}" class="comments-container">
+                                @if(count($blogPost->comments))
+                                    @foreach($blogPost->comments as $comment)
+                                        <div class="blog-container">
+                                            <div class="blog-author">{{$comment->author}} написал:</div>
+                                            <div class="review-header">{{$comment->created_at}}</div>
+                                            <div class="blog-body">{{$comment->body}}</div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="hero-secondary text-black">Комментарии отсутствуют</div>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                     {{ $blogPosts->links() }}

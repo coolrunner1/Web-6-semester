@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Services\FormValidation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,14 +20,18 @@ class BlogController extends Controller
     }
 
     public function index() {
-        $blogPosts = Blog::orderBy('created_at', 'desc')->paginate(10);
+        $blogPosts = Blog::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->orderBy('created_at', 'desc')->paginate(10);
         return view('blog', compact('blogPosts'));
     }
 
     public function blogEditIndex() {
         $errorsList = $this->errors;
         $success = $this->sent;
-        $blogPosts = Blog::orderBy('created_at', 'desc')->paginate(10);
+        $blogPosts = Blog::with(['comments' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->orderBy('created_at', 'desc')->paginate(10);
         return view('admin.blogedit', compact('errorsList', 'success', 'blogPosts'));
     }
 

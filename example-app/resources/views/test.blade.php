@@ -29,7 +29,7 @@
                     Тест был успешно отправлен!
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/test")}}"><button id='yes-popup'>Вернуться к тесту</button></a>
+                        <a href="{{url("/test")}}"><button id='no-popup'>Вернуться к тесту</button></a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     </ul>
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/test")}}"><button id='yes-popup'>Вернуться к тесту</button></a>
+                        <a href="{{url("/test")}}"><button id='no-popup'>Вернуться к тесту</button></a>
                     </div>
                 </div>
             </div>

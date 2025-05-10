@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{{ csrf_token() }}">
 
         <x-title/>
 
@@ -18,6 +19,8 @@
         @vite('resources/js/jquery-3.7.1.min.js')
         @vite('resources/js/script.js')
         @vite('resources/js/timer.js')
+        @vite('resources/js/comment.js')
+
     </head>
     <body>
         <x-navbar/>
@@ -37,6 +40,23 @@
                                 <img src="{{ url("storage/blog/placeholder.png") }}" alt="placeholder"/>
                             @endif
                             <div class="blog-body">{{$blogPost->body}}</div>
+                            <h3 class="hero-header text-black">Комментарии</h3>
+                            @auth
+                                <button id="but-post-{{$blogPost->id}}" class="add-comment-btn">Добавить комментарий</button>
+                            @endauth
+                            <div id="post-comments-{{$blogPost->id}}" class="comments-container">
+                                @if(count($blogPost->comments))
+                                    @foreach($blogPost->comments as $comment)
+                                        <div class="blog-container">
+                                            <div class="blog-author">{{$comment->author}} написал:</div>
+                                            <div class="review-header">{{$comment->created_at}}</div>
+                                            <div class="blog-body">{{$comment->body}}</div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="hero-secondary text-black">Комментарии отсутствуют</div>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                     {{ $blogPosts->links() }}

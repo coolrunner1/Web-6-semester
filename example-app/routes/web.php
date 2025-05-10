@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GuestBookController;
@@ -80,3 +81,5 @@ Route::get("/admin/history", [HistoryController::class, 'index']);
 Route::get("/history", function () {
     return view('history');
 });
+
+Route::post("/blog/{id}/comment", [CommentController::class, 'addComment'])->middleware('auth');
