@@ -365,7 +365,7 @@ label + button {
     margin-bottom: 20px;
 }
 
-.bottom-buttons {
+.bottom-buttons, .blog-edit-buttons-container {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -723,7 +723,7 @@ td {
     justify-content: center;
 }
 
-.review-container, .result-container, .blog-container {
+.review-container, .result-container, .blog-container, .comment-container {
     display: flex;
     flex-direction: column;
     padding: 15px;
@@ -736,7 +736,7 @@ td {
     font-size: 15px;
 }
 
-.review-header, .result-header {
+.review-header, .result-header, .comment-header, .blog-date {
     color: #0a0a0a;
 }
 
@@ -770,7 +770,7 @@ td {
     color: black
 }
 
-.blog-author {
+.blog-author, .comment-author {
     color: black;
     font-size: 20px;
     font-weight: lighter;
@@ -782,7 +782,7 @@ td {
     align-items: center;
 }
 
-.blog-body {
+.blog-body, .comment-body {
     margin-top: 15px;
     color: #0a0a0a;
     font-size: 18px;
@@ -847,5 +847,11 @@ td {
     flex-direction: column;
     gap: 10px;
     margin-top: 10px;
+    width: 100%;
+}
+
+.blog-edit-form {
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }

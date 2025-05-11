@@ -52,11 +52,17 @@ Route::post('/test', [TestController::class, 'store']);
 
 Route::get('/blog', [BlogController::class, 'index']);
 
+Route::post("/blog/{id}/comment", [CommentController::class, 'addComment'])->middleware('auth');
+
 Route::get('/admin/blog', [BlogController::class, 'blogEditIndex']);
 
 Route::get('/admin/blog/add', [BlogController::class, 'blogEditIndex']);
 
 Route::post('/admin/blog/add', [BlogController::class, 'store']);
+
+Route::put('/admin/blog/{id}', [BlogController::class, 'editBlogPost']);
+
+Route::delete('/admin/blog/{id}', [BlogController::class, 'destroy']);
 
 Route::get('/admin/blog/upload', [BlogController::class, 'blogEditIndex']);
 
@@ -81,5 +87,3 @@ Route::get("/admin/history", [HistoryController::class, 'index']);
 Route::get("/history", function () {
     return view('history');
 });
-
-Route::post("/blog/{id}/comment", [CommentController::class, 'addComment'])->middleware('auth');

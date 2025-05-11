@@ -23,10 +23,10 @@ class CommentController extends Controller
 
         foreach ($comments as $comment) {
             $htmlComments = $htmlComments.
-                "<div class='blog-container'>
-                     <div class='blog-author'>{$comment->author} написал:</div>
-                     <div class='review-header'>{$comment->created_at}</div>
-                     <div class='blog-body'>{$comment->body}</div>
+                "<div class='comment-container'>
+                     <div class='comment-author'>{$comment->author} написал:</div>
+                     <div class='comment-header'>{$comment->created_at}</div>
+                     <div class='comment-body'>{$comment->body}</div>
                  </div>";
         }
 

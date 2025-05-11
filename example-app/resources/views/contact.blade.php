@@ -91,7 +91,7 @@
                         <span class="label-text">Дата рождения</span>
                         <input id="date" name="birthdate" type="date" required readonly />
                     </label>
-                    <<div id="calendar-container"></div>
+                    <div id="calendar-container"></div>
                 </div>
                 <div class="input-container" id="text-container">
                     <label id="topic-label" for="text">

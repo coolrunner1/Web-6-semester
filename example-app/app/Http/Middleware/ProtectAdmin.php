@@ -17,9 +17,7 @@ class ProtectAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        error_log("test");
         if ($request->is('admin/*', 'admin')) {
-            error_log("admin");
             if (!Auth::check()) {
                 return redirect('/login');
             }

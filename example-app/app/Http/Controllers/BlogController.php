@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Comment;
 use App\Services\FormValidation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class BlogController extends Controller
@@ -73,6 +71,42 @@ class BlogController extends Controller
         }
 
         return $this->blogEditIndex();
+    }
+
+    public function destroy($id) {
+        Blog::destroy($id);
+        return $this->blogEditIndex();
+    }
+
+    public function editBlogPost(Request $request) {
+        $request->validate([
+            'data' => 'required|json'
+        ]);
+
+        $data = json_decode($request->input('data'), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return response()->json(['status' => 'error', 'message' => 'Invalid JSON format.'], 400);
+        }
+
+        $requiredKeys = ['author', 'topic', 'body'];
+        foreach ($requiredKeys as $key) {
+            if (!isset($data[$key])) {
+                return response()->json(['status' => 'error', 'message' => "$key is required."], 400);
+            }
+        }
+
+        $updated = Blog::where('id', $request->id)->update([
+            'author' => $data['author'],
+            'topic' => $data['topic'],
+            'body' => $data['body'],
+        ]);
+
+        if ($updated) {
+            return response()->json(['status' => 'success'], 200);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'Update failed.'], 500);
+        }
     }
 
     public function addBlogPostsFromFile(Request $request) {
@@ -143,7 +177,6 @@ class BlogController extends Controller
                 $post->created_at,
             ];
         }
-
 
         $handle = fopen('php://temp', 'r+');
 

@@ -29,7 +29,7 @@ const submitComment = async (postId) => {
     }
 
     console.log(postId, body);
-    const res = await fetch(`http://${window.location.host}/blog/${postId}/comment`,
+    const res = await fetch(`/blog/${postId}/comment`,
         {
             method: "POST",
             headers: {
@@ -54,7 +54,7 @@ const submitComment = async (postId) => {
 
     let newComments;
 
-    await fetch(`http://${window.location.host}/api/blog/${postId}/comments`)
+    await fetch(`/api/blog/${postId}/comments`)
         .then(res => res.json())
         .then(json => newComments = json.data)
         .catch(err => alert(err.toString()))

@@ -33,7 +33,7 @@
                         <div class="blog-container">
                             <h1 class="hero-header text-black">{{$blogPost->topic}}</h1>
                             <div class="blog-author">By {{$blogPost->author}}</div>
-                            <div class="review-header">{{$blogPost->created_at}}</div>
+                            <div class="blog-date">{{$blogPost->created_at}}</div>
                             @if (!is_null($blogPost->image))
                                 <img src="{{ url("storage/".$blogPost->image) }}" alt="illustration" />
                             @else
@@ -47,10 +47,10 @@
                             <div id="post-comments-{{$blogPost->id}}" class="comments-container">
                                 @if(count($blogPost->comments))
                                     @foreach($blogPost->comments as $comment)
-                                        <div class="blog-container">
-                                            <div class="blog-author">{{$comment->author}} написал:</div>
-                                            <div class="review-header">{{$comment->created_at}}</div>
-                                            <div class="blog-body">{{$comment->body}}</div>
+                                        <div class="comment-container">
+                                            <div class="comment-author">{{$comment->author}} написал:</div>
+                                            <div class="comment-header">{{$comment->created_at}}</div>
+                                            <div class="comment-body">{{$comment->body}}</div>
                                         </div>
                                     @endforeach
                                 @else
