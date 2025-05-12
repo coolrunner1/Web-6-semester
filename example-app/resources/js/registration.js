@@ -1,3 +1,4 @@
+//I was forced to do this. I know that it sucks.
 const loginInput = document.querySelector("#login");
 
 loginInput.addEventListener('blur', () => {
@@ -8,11 +9,10 @@ loginInput.addEventListener('blur', () => {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(xhr.responseText)
             addLoginAvailability(xhr.responseText);
         }
     };
-    xhr.open("POST", `http://${window.location.host}/api/check-login`, true);
+    xhr.open("POST", `/api/check-login`, true);
     xhr.send(login);
 });
 

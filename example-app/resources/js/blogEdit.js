@@ -39,6 +39,7 @@ $(document).on("click", ".edit-button", function () {
     $('#no-popup').on('click', () => $("#fullscreen-overlay").remove())
 });
 
+//I was forced to do this. This is fucking dumb.
 const submit = (postId) => {
     const requestBody = {
         topic: $('#topic-edit').val(),

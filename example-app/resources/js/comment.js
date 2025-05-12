@@ -28,7 +28,7 @@ const submitComment = async (postId) => {
         return;
     }
 
-    console.log(postId, body);
+    //I was forced to do this. I know that it sucks ass.
     const res = await fetch(`/blog/${postId}/comment`,
         {
             method: "POST",

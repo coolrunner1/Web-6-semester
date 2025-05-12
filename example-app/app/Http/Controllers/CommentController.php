@@ -17,6 +17,7 @@ class CommentController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Comment added successfully.'], 200);
     }
 
+    //That is crap.
     public function getCommentsByBlogPostId(Request $request) {
         $comments = Comment::where('blog_id', $request->route('id'))->orderBy('created_at', 'desc')->get();
         $htmlComments = "";
