@@ -15,6 +15,11 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
+        @vite('resources/js/calendar.js')
+        @vite('resources/js/erase.js')
     </head>
     <body id="contact">
         <x-navbar/>
@@ -84,9 +89,9 @@
                 <div class="input-container" id="date-container">
                     <label id="date-label" for="date">
                         <span class="label-text">Дата рождения</span>
-                        <input id="date" name="birthdate" type="date" required />
+                        <input id="date" name="birthdate" type="date" required readonly />
                     </label>
-                    <!--<div id="calendar-container"></div>-->
+                    <div id="calendar-container"></div>
                 </div>
                 <div class="input-container" id="text-container">
                     <label id="topic-label" for="text">
@@ -100,7 +105,7 @@
                 </label>
                 <div class="bottom-buttons">
                     <button id="but2" type="submit">Отправить</button>
-                    <button id="but3" type="reset">Очистить</button>
+                    <button id="but3" type="button">Очистить</button>
                 </div>
             </form>
             <x-footer/>

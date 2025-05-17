@@ -14,6 +14,12 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
+        @vite('resources/js/erase.js')
+        @vite('resources/js/test.js')
     </head>
     <body id="contact">
         <x-navbar/>
@@ -23,7 +29,7 @@
                     Тест был успешно отправлен!
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/test")}}"><button id='yes-popup'>Вернуться к тесту</button></a>
+                        <a href="{{url("/test")}}"><button id='no-popup'>Вернуться к тесту</button></a>
                     </div>
                 </div>
             </div>
@@ -39,7 +45,7 @@
                     </ul>
                     <div class='bottom-buttons'>
                         <a href="{{url("/")}}"><button id='yes-popup'>Вернуться домой</button></a>
-                        <a href="{{url("/test")}}"><button id='yes-popup'>Вернуться к тесту</button></a>
+                        <a href="{{url("/test")}}"><button id='no-popup'>Вернуться к тесту</button></a>
                     </div>
                 </div>
             </div>
@@ -134,9 +140,9 @@
                 </select>
                 <div id="result"></div>
                 <div class="bottom-buttons">
-                    <!--<button id="but4" type="button">Проверить</button>-->
+                    <button id="but4" type="button">Проверить</button>
                     <button id="but2" type="submit">Отправить</button>
-                    <button id="but3" type="reset">Очистить</button>
+                    <button id="but3" type="button">Очистить</button>
                 </div>
             </form>
             <div class="secondary-contact-text">Результаты выполнения теста</div>

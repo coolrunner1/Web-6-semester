@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GuestBookController;
@@ -51,11 +52,17 @@ Route::post('/test', [TestController::class, 'store']);
 
 Route::get('/blog', [BlogController::class, 'index']);
 
+Route::post("/blog/{id}/comment", [CommentController::class, 'addComment'])->middleware('auth');
+
 Route::get('/admin/blog', [BlogController::class, 'blogEditIndex']);
 
 Route::get('/admin/blog/add', [BlogController::class, 'blogEditIndex']);
 
 Route::post('/admin/blog/add', [BlogController::class, 'store']);
+
+Route::put('/admin/blog/{id}', [BlogController::class, 'editBlogPost']);
+
+Route::delete('/admin/blog/{id}', [BlogController::class, 'destroy']);
 
 Route::get('/admin/blog/upload', [BlogController::class, 'blogEditIndex']);
 
@@ -76,3 +83,7 @@ Route::get("/logout", [AuthController::class, "logout"]);
 Route::get("/admin", [AdminController::class, 'index']);
 
 Route::get("/admin/history", [HistoryController::class, 'index']);
+
+Route::get("/history", function () {
+    return view('history');
+});

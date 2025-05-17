@@ -88,4 +88,10 @@ class AuthController extends Controller
 
         return redirect("/");
     }
+
+    public function checkLoginAvailability(Request $request) {
+        $exists = User::where('login', $request->getContent())->exists();
+
+        return $exists ? "Логин уже занят" : "Логин свободен";
+    }
 }

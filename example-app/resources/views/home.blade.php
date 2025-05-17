@@ -14,6 +14,10 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
     </head>
     <body id="main-page">
         <x-navbar/>
@@ -28,9 +32,9 @@
                             <div class="hero">Меня зовут Козловцев Игорь</div>
                     @endguest
                     <div class="hero-secondary">Я студент группы ИС/б-22-1-о</div>
-                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №10 - Исследование механизма сессий в PHP</div>
+                    <div class="hero-secondary">ЛАБОРАТОРНАЯ РАБОТА №11 - Исследование возможностей асинхронного взаимодействия с сервером. Технология AJAX</div>
                 </div>
-                <img src="{{url('storage/home/phplogo.jpg')}}" title="PHP" alt="php" width="600" height="330">
+                <img src="{{url('storage/home/ajax.gif')}}" title="AJAX" alt="ajax" width="600" height="330">
             </div>
             <div id="container-with-box">
                 <div class="content-box">

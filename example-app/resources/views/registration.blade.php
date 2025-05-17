@@ -14,6 +14,11 @@
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
+
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/script.js')
+        @vite('resources/js/timer.js')
+        @vite('resources/js/registration.js')
     </head>
     <body id="contact">
         <x-navbar/>
@@ -48,8 +53,8 @@
                 @csrf <!-- {{ csrf_field() }} -->
                 <div class="information color-white">Регистрация</div>
                 <div>Уже зарегистрированы? <a href="{{url("/login")}}" class="hero-secondary-but login-form-link">Войдите сейчас!</a></div>
-                <label id="login-label" for="name" class="test"><span class="label-text">Фамилия Имя Отчество</span>
-                    <span class="input-container input-container-test" id="login-container">
+                <label id="name-label" for="name" class="test"><span class="label-text">Фамилия Имя Отчество</span>
+                    <span class="input-container input-container-test" id="name-container">
                         <input id="name" name="name" type="text" placeholder="Введите своё имя" required />
                     </span>
                 </label>
@@ -58,6 +63,7 @@
                         <input id="login" name="login" type="text" placeholder="Введите логин" required />
                     </span>
                 </label>
+                <div id="login-tip-container"></div>
                 <label id="email-label" for="email" class="test">
                     <span class="label-text">Электронная почта</span>
                     <span class="input-container input-container-test" id="email-container">

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="_token" content="{{ csrf_token() }}">
 
         <x-title/>
 
@@ -15,6 +16,10 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 
+        @vite('resources/js/jquery-3.7.1.min.js')
+        @vite('resources/js/erase.js')
+        @vite('resources/js/timer.js')
+        @vite('resources/js/blogEdit.js')
     </head>
     <body id="contact">
         <x-admin-navbar/>
@@ -77,7 +82,7 @@
                 </label>
                 <div class="bottom-buttons">
                     <button id="but2" type="submit">Отправить</button>
-                    <button id="but3" type="reset">Очистить</button>
+                    <button id="but3" type="button">Очистить</button>
                 </div>
             </form>
             <div class="secondary-contact-text">Записи блога</div>
@@ -93,16 +98,38 @@
                 @if (count($blogPosts) > 0)
                     {{ $blogPosts->links() }}
                     @foreach($blogPosts as $blogPost)
-                        <div class="blog-container">
-                            <h1 class="hero-header text-black">{{$blogPost->topic}}</h1>
+                        <div id="blog-{{$blogPost->id}}" class="blog-container">
+                            <div class="blog-edit-buttons-container">
+                                <button id="edit-{{$blogPost->id}}" class="edit-button">Редактировать</button>
+                                <form action="{{ url("/admin/blog/".$blogPost->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Вы точно хотите удалить этот пост?')">Удалить</button>
+                                </form>
+                            </div>
+                            <h1 class="hero-header text-black blog-topic">{{$blogPost->topic}}</h1>
                             <div class="blog-author">By {{$blogPost->author}}</div>
-                            <div class="review-header">{{$blogPost->created_at}}</div>
+                            <div class="blog-date">{{$blogPost->created_at}}</div>
                             @if (!is_null($blogPost->image))
                                 <img src="{{ url("storage/".$blogPost->image) }}" alt="illustration" />
                             @else
                                 <img src="{{ url("storage/blog/placeholder.png") }}" alt="placeholder"/>
                             @endif
                             <div class="blog-body">{{$blogPost->body}}</div>
+                            <h3 class="hero-header text-black">Комментарии</h3>
+                            <div id="post-comments-{{$blogPost->id}}" class="comments-container">
+                                @if(count($blogPost->comments))
+                                    @foreach($blogPost->comments as $comment)
+                                        <div class="comment-container">
+                                            <div class="comment-author">{{$comment->author}} написал:</div>
+                                            <div class="comment-header">{{$comment->created_at}}</div>
+                                            <div class="comment-body">{{$comment->body}}</div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="hero-secondary text-black">Комментарии отсутствуют</div>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                     {{ $blogPosts->links() }}
