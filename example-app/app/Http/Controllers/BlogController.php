@@ -75,7 +75,7 @@ class BlogController extends Controller
 
     public function destroy($id) {
         Blog::destroy($id);
-        return $this->blogEditIndex();
+        return redirect('/admin/blog');
     }
 
     public function editBlogPost(Request $request) {
